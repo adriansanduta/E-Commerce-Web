@@ -56,6 +56,17 @@ function priceHTML(originalPrice, salePrice) {
   )}</span>$${salePrice.toFixed(2)}`;
 }
 
+function ratingsHTML(rating) {
+  let ratingHTML = "";
+  for (let i = 0; i < Math.floor(rating); ++i) {
+    ratingHTML += '<i class="fas fa-star"></i>\n';
+  }
+  if (!Number.isInteger(rating)) {
+    ratingHTML += '<i class="fas fa-star-half-alt"></i>\n';
+  }
+  return ratingHTML;
+}
+
 function filterBooks(event) {
     renderBooks(event.target.value);
 }
