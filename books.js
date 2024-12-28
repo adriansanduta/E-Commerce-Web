@@ -47,6 +47,15 @@ async function renderBooks(filter) {
   booksWrapper.innerHTML = booksHtml;
 }
 
+function priceHTML(originalPrice, salePrice) {
+  if (!salePrice) {
+    return `$${originalPrice.toFixed(2)}`;
+  }
+  return `<span class="book__price--normal">$${originalPrice.toFixed(
+    2
+  )}</span>$${salePrice.toFixed(2)}`;
+}
+
 function filterBooks(event) {
     renderBooks(event.target.value);
 }
