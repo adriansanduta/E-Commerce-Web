@@ -1,7 +1,29 @@
-function renderBooks(filter) {
-  const booksWrapper = document.querySelector('.books');
+let books;
+
+async function renderBooks(filter) {
+  const booksWrapper = document.querySelector(".books");
+
+  booksWrapper.classList += ' books__loading'
+
+  if (!books) {
+    books = await getBooks();
+  }
   
-  const books = getBooks();
+  booksWrapper.classList.remove('books__loading')
+
+  if (filter === "LOW_TO_HIGH") {
+    books.sort(
+      (a, b) =>
+        (a.salePrice || a.originalPrice) - (b.salePrice || b.originalPrice)
+    );
+  } else if (filter === "HIGH_TO_LOW") {
+    books.sort(
+      (a, b) =>
+        (b.salePrice || b.originalPrice) - (a.salePrice || a.originalPrice)
+    );
+  } else if (filter === "RATING") {
+    books.sort((a, b) => b.rating - a.rating);
+  }
   
   const booksHtml = books.map((book) => {
   return `<div class="book">
@@ -28,9 +50,7 @@ booksWrapper.innerHTML = booksHtml;
 }
 
 function filterBooks(event) {
-  if (event.target.value === 'LOW_TO_HIGH') {
     renderBooks(event.target.value);
-  }
 }
 
 
