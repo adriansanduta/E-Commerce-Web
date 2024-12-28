@@ -3,13 +3,13 @@ function renderBooks() {
   
   const books = getBooks();
   
-  books.map(book => {
+  const booksHtml = books.map((book) => {
   return `<div class="book">
   <figure class="book__img--wrapper">
-    <img class="book__img" src="${books[0].url}" alt=""></img>
+    <img class="book__img" src="${book.url}" alt=""></img>
   </figure>
   <div class="book__title">
-    ${books[0].title}
+    ${book.title}
   </div>
   <div class="book__ratings">
     <i class="fas fa-star"></i>
@@ -19,11 +19,16 @@ function renderBooks() {
     <i class="fas fa-star-half-alt"></i>
   </div>
   <div class="book__price">
-    <span class="book__price--normal">$${books[0].originalPrice}</span> $${books[0].salePrice}
+    <span>$${book.originalPrice.toFixed(2)}</span> 
   </div>
-</div>`
+</div>`;
 })
-booksWrapper.innerHTML = ;
+.join("");
+
+
+
+booksWrapper.innerHTML = booksHtml;
+ // booksWrapper.innerHTML = ;
 }
 
 
@@ -36,7 +41,7 @@ function getBooks() {
     {
       id: 1,
       title: "Crack the Coding Interview",
-                url: "assets/crack the coding interview.png",
+      url: "assets/crack the coding interview.png",
       originalPrice: 49.95,
       salePrice: 14.95,
       rating: 4.5,
